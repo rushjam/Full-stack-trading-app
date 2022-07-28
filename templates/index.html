@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stocks</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <!-- <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet"> -->
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+
+<body>
+  <!-- CREDIT UI : https://dribbble.com/shots/16905786-Travel-guide-ui-website -->
+  <!-- 
+<div id="error-responsive">
+    <span class="ops">OOOPS!!!!</span>
+    <div>At the current time Only <span>Desktop</span> View more than <span>1366</span> &times; <span>768</span> Avialble</div>
+  </div>
+  
+  <div id="app" class="app">
+    <header class="app__header">
+      <a class="app__logo" href="#">
+        <span class="app__logo_text">Tra</span>
+        <span class="app__logo_text">velar</span>
+      </a>
+      <nav class="app__nav">
+        <ul class="app__nav_list">
+          <li class="app__nav_item">
+            <a class="app__nav_link" href="#home">Home</a>
+          </li>
+          <li class="app__nav_item">
+            <a class="app__nav_link" href="#place">All Assets</a>
+          </li>
+          <li class="app__nav_item">
+            <a class="app__nav_link" href="#guide">Market Activity</a>
+          </li>
+          <li class="app__nav_item">
+            <a class="app__nav_link" href="#gallery">Insights</a>
+          </li>
+          <li class="app__nav_item">
+            <a class="app__nav_link" href="#contact">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="app__hero">
+      <header class="app__heading">
+        <h1 class="app__title">
+          <span class="app__heading_text">Discover</span> Stocks
+          With a Guide
+        </h1>
+        <p class="app__description app__description--top">
+          help you to how to find a reliable stocks with guide and insights
+        </p>
+      </header>
+      <form "/search" class="app__cta">
+        <input type="search" class="app__find" placeholder="Find a symbol" />
+        <button class="app__cta_btn" type="button"><i class="search icon"></i></button>
+      </form>
+      <section class="app__more">
+        <p class="app__description app__description--sub">
+          What is exitest you most?
+        </p>
+        <ul class="app__icons">
+          <li class="app__icon_item">
+            <figure class="app__icon">
+              <svg class="app__icon_img" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0 0 171 171" style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,171.98863v-171.98863h171.98863v171.98863z" fill="none"></path>
+                  <g>
+                    <path d="M126.96182,129.00113c-1.21894,-0.00104 -2.28265,-0.82692 -2.58571,-2.00758l-18.55417,-72.23381c-0.36716,-1.42952 0.49406,-2.88602 1.92358,-3.25317c1.42952,-0.36716 2.88602,0.49406 3.25317,1.92358l18.55383,72.23347c0.20517,0.80026 0.02885,1.65041 -0.47764,2.30308c-0.50649,0.65266 -1.28627,1.03451 -2.1124,1.03443z" fill="#cdcdcd"></path>
+                    <path d="M74.55099,23.79772l-0.80824,-2.07671c-0.49595,-1.28105 -1.66331,-2.17987 -3.02857,-2.33188l-0.07414,-0.00835c-2.14854,-0.24357 -4.17823,1.03696 -4.88352,3.08101l-3.1488,9.11777l0.20039,1.46653l-1.11317,8.92039l11.17478,1.40273l0.82928,-6.65698l7.0601,1.8279c0.24391,0.06315 0.5032,0.01814 0.71156,-0.12352c0.20836,-0.14166 0.34558,-0.36622 0.37656,-0.61626l0.60117,-4.8578l3.17653,-0.82093l-2.47382,-6.7054l1.07977,-8.59108l-5.12666,-0.64292z" fill="#f1c40f"></path>
+                    <path d="M38.85274,82.1645c-2.93132,-0.39717 -4.99315,-3.08493 -4.61733,-6.01907l3.92031,-30.61401c0.38686,-3.02139 3.14021,-5.16383 6.16402,-4.79635l13.64259,1.66024l-0.66797,5.82836l0.96121,0.11088l-4.47305,35.79611z" fill="#e74c3c"></path>
+                    <circle cx="151.404" cy="98.791" transform="scale(0.33398,0.33398)" r="25.264" fill="#e74c3c"></circle>
+                    <path d="M102.60167,72.18171l-12.69742,-0.02204l-4.42663,-10.69685l-10.57929,4.11068l6.27022,14.32158c0.80509,1.83825 2.6212,3.02632 4.62802,3.02757l20.2979,0.01035z" fill="#f1c40f"></path>
+                    <path d="M85.91147,62.51085l-6.09622,-14.73172c-1.00205,-2.42157 -3.22703,-4.11875 -5.82736,-4.445l-12.81264,-1.60713l-1.45884,1.48723c-1.33386,1.35977 -2.18453,3.11977 -2.42139,5.00977l-4.00147,31.89551l21.17929,2.65718l1.77212,-14.12754l-0.90176,-2.06035z" fill="#3498db"></path>
+                    <path d="M53.9151,96.81138l-3.88624,25.78059l-14.85629,22.17923l10.81709,7.35868l15.9865,-23.86652l8.39704,-20.73509v-0.02739l-10.00216,-4.38521c-2.84066,-1.25583 -5.13294,-3.49427 -6.45592,-6.30429z" fill="#000000"></path>
+                    <path d="M110.53113,72.99729l-0.8894,-3.3669c0,0 -2.68089,0.90977 -3.67383,2.55531l-3.67683,-0.00334l3.44572,10.75129c0,0 12.64665,0.41113 13.70505,-2.81549c0.77351,-2.35793 -0.52335,-5.49905 -1.59979,-7.39775c-0.54717,-0.95739 -1.68284,-1.41028 -2.73867,-1.09213z" fill="#000000"></path>
+                    <path d="M70.37418,107.49955l-10.00216,-4.38521c-2.84081,-1.2553 -5.13343,-3.49326 -6.45692,-6.30295l-0.39143,2.59539l13.00235,17.62135l3.84817,-9.50219z" fill="#000000"></path>
+                    <path d="M52.10156,89.63005c-0.74691,5.95224 2.50919,11.68706 8.00327,14.09581l26.5561,11.64403l-3.22529,25.70978l13.03007,1.60813l3.93667,-31.75189c0.395,-3.15062 -1.10317,-6.2382 -3.82245,-7.87769l-22.91834,-13.8176l0.81125,-6.4656l-21.17929,-2.65718z" fill="#000000"></path>
+                    <path d="M97.66371,141.9644l-14.11785,-1.77012l-1.195,9.52557l17.93196,2.24972l0.7164,-5.71113c0.12727,-1.01177 -0.15267,-2.03265 -0.77823,-2.83798c-0.62556,-0.80533 -1.54546,-1.3291 -2.55727,-1.45606z" fill="#000000"></path>
+                    <path d="M47.3523,152.15527l-11.82305,-7.91844l-5.34375,7.97621l15.0156,10.05794l3.20358,-4.78266c1.18165,-1.76338 0.71055,-4.15074 -1.05238,-5.33306z" fill="#000000"></path>
+                    <circle cx="151.404" cy="98.791" transform="scale(0.33398,0.33398)" r="8" fill="#ffffff"></circle>
+                    <path d="M71.45496,57.70883l4.78934,10.93899l-1.2137,9.68121z" fill="#3498db"></path>
+                    <path d="M69.85383,35.53026l3.01588,7.83895l0.82928,-6.65698z" fill="#f1c40f"></path>
+                    <path d="M79.45188,16.89961l-5.02813,8.41307l-1.30254,-3.34953c-0.40788,-1.04832 -1.36341,-1.78404 -2.48117,-1.91039l-0.07448,-0.00835c-1.83691,-0.20689 -3.57155,0.88815 -4.1748,2.63547l-3.57998,10.36688l-3.3001,-4.51513c-0.91015,-1.24381 -1.31063,-2.7884 -1.11952,-4.31775l0.9415,-7.50363c0.68281,-5.44122 5.64697,-9.29892 11.08828,-8.6168l19.08086,2.39367l-0.5641,4.49844c-0.21163,1.68717 -1.75085,2.88337 -3.43804,2.67188z" fill="#000000"></path>
+                  </g>
+                </g>
+              </svg>
+              <figcaption>Trekking</figcaption>
+            </figure>
+          </li>
+          <li class="app__icon_item">
+            <figure class="app__icon">
+              <svg class="app__icon_img" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 171 171" style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,171.98863v-171.98863h171.98863v171.98863z" fill="none"></path>
+                  <g>
+                    <path d="M108.24883,113.2739l-50.52273,-50.52273c-0.36425,-0.36458 -0.85847,-0.56942 -1.37383,-0.56942c-0.51536,0 -1.00958,0.20484 -1.37383,0.56942l-42.01159,42.01159c-14.71021,14.71021 -14.71021,38.56018 0,53.27039c14.71021,14.71021 38.56018,14.71021 53.27039,0l42.01159,-42.01159c0.36458,-0.36425 0.56942,-0.85847 0.56942,-1.37383c0,-0.51536 -0.20484,-1.00958 -0.56942,-1.37383z" fill="#f1c40f"></path>
+                    <path d="M167.11364,1.94318c-32.87795,-0.09131 -64.426,12.97442 -87.61204,36.28484l-16.75023,16.75023c-0.36458,0.36425 -0.56942,0.85847 -0.56942,1.37383c0,0.51536 0.20484,1.00958 0.56942,1.37383l50.52273,50.52273c0.36427,0.36453 0.85849,0.56934 1.37383,0.56934c0.51534,0 1.00956,-0.20481 1.37383,-0.56934l16.75023,-16.75023c23.31042,-23.18605 36.37615,-54.73409 36.28484,-87.61204c0,-1.07319 -0.86999,-1.94318 -1.94318,-1.94318z" fill="#f1c40f"></path>
+                    <path d="M70.19181,154.07877l-53.27058,-53.27058l-3.95457,3.95476c-14.71021,14.71021 -14.71021,38.56018 0,53.27039c14.71021,14.71021 38.56018,14.71021 53.27039,0z" fill="#3498db"></path>
+                    <path d="M96.58974,101.61481l-27.20455,-27.20455c-0.36425,-0.36458 -0.85847,-0.56942 -1.37383,-0.56942c-0.51536,0 -1.00958,0.20484 -1.37383,0.56942l-19.43182,19.43182c-0.36458,0.36425 -0.56942,0.85847 -0.56942,1.37383c0,0.51536 0.20484,1.00958 0.56942,1.37383l27.20455,27.20455c0.36427,0.36453 0.85849,0.56934 1.37383,0.56934c0.51534,0 1.00956,-0.20481 1.37383,-0.56934l19.43182,-19.43182c0.36458,-0.36425 0.56942,-0.85847 0.56942,-1.37383c0,-0.51536 -0.20484,-1.00958 -0.56942,-1.37383z" fill="#e67e22"></path>
+                    <path d="M114.07838,56.92163c-3.97127,-3.97312 -9.35857,-6.20535 -14.9761,-6.20535c-5.61753,0 -11.00484,2.23223 -14.9761,6.20535l-9.71591,9.71591c-0.36458,0.36425 -0.56942,0.85847 -0.56942,1.37383c0,0.51536 0.20484,1.00958 0.56942,1.37383l27.20455,27.20455c0.36427,0.36453 0.85849,0.56934 1.37383,0.56934c0.51534,0 1.00956,-0.20481 1.37383,-0.56934l9.71591,-9.71591c8.25848,-8.27629 8.25848,-21.67592 0,-29.9522z" fill="#e67e22"></path>
+                    <path d="M124.36364,48.57955c-0.78581,-0.00017 -1.49418,-0.47361 -1.79487,-1.19961c-0.3007,-0.72601 -0.13453,-1.56166 0.42104,-2.1174l21.375,-21.375c0.76246,-0.73641 1.97444,-0.72588 2.72399,0.02367c0.74955,0.74955 0.76008,1.96152 0.02367,2.72399l-21.375,21.375c-0.36393,0.36504 -0.85837,0.56995 -1.37383,0.56935z" fill="#3498db"></path>
+                    <path d="M133.51019,122.98981l-85.5,-85.5c-0.55574,-0.55557 -1.39139,-0.72174 -2.1174,-0.42104c-0.72601,0.3007 -1.19945,1.00906 -1.19961,1.79487v5.82955h-5.82955c-0.78581,0.00017 -1.49418,0.47361 -1.79487,1.19961c-0.3007,0.72601 -0.13453,1.56166 0.42104,2.1174l85.5,85.5c0.55574,0.55557 1.39139,0.72174 2.1174,0.42104c0.72601,-0.3007 1.19945,-1.00906 1.19961,-1.79487v-5.82955h5.82955c0.78581,-0.00017 1.49418,-0.47361 1.79487,-1.19961c0.3007,-0.72601 0.13453,-1.56166 -0.42104,-2.1174z" fill="#3498db"></path>
+                    <path d="M48.01019,18.05799l-15.54545,-15.54545c-0.36425,-0.36458 -0.85847,-0.56942 -1.37383,-0.56942c-0.51536,0 -1.00958,0.20484 -1.37383,0.56942l-27.20455,27.20455c-0.36458,0.36425 -0.56942,0.85847 -0.56942,1.37383c0,0.51536 0.20484,1.00958 0.56942,1.37383l15.54545,15.54545c0.36425,0.36457 0.85848,0.56939 1.37383,0.56935h27.20455c1.07319,0 1.94318,-0.86999 1.94318,-1.94318v-27.20455c0.00004,-0.51535 -0.20478,-1.00958 -0.56935,-1.37383z" fill="#3498db"></path>
+                    <path d="M168.48747,138.53526l-15.54545,-15.54545c-0.36425,-0.36457 -0.85848,-0.56939 -1.37383,-0.56935h-27.20455c-1.07319,0 -1.94318,0.86999 -1.94318,1.94318v27.20455c-0.00004,0.51535 0.20478,1.00958 0.56935,1.37383l15.54545,15.54545c0.36427,0.36453 0.85849,0.56934 1.37383,0.56934c0.51534,0 1.00956,-0.20481 1.37383,-0.56934l27.20455,-27.20455c0.36458,-0.36425 0.56942,-0.85847 0.56942,-1.37383c0,-0.51536 -0.20484,-1.00958 -0.56942,-1.37383z" fill="#3498db"></path>
+                  </g>
+                </g>
+              </svg>
+              <figcaption>Kayaking</figcaption>
+            </figure>
+          </li>
+          <li class="app__icon_item">
+            <figure class="app__icon">
+              <svg class="app__icon_img" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 171 171" style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,171.98863v-171.98863h171.98863v171.98863z" fill="none"></path>
+                  <g>
+                    <g>
+                      <path d="M127.23903,4.5336c-0.53219,-0.61662 -1.30638,-0.9711 -2.1209,-0.9711c-0.81452,0 -1.58871,0.35448 -2.1209,0.9711c-1.34709,1.71 -32.99516,42.4148 -32.99516,93.45335c-0.29345,21.18793 2.59833,42.29969 8.5785,62.62829c1.26315,4.04231 4.99773,6.80187 9.23275,6.82226h34.60969c4.23495,-0.02044 7.96945,-2.77996 9.23261,-6.82219c5.98017,-20.3286 8.87195,-41.44036 8.5785,-62.62829c0,-51.03862 -31.648,-91.74346 -32.99509,-93.45342z" fill="#3498db"></path>
+                      <path d="M48.00276,4.5336c-0.53219,-0.61662 -1.30638,-0.9711 -2.1209,-0.9711c-0.81452,0 -1.58871,0.35448 -2.1209,0.9711c-1.34709,1.71 -32.99516,42.4148 -32.99516,93.45335c-0.29284,21.18779 2.59833,42.2994 8.57675,62.62836c1.26434,4.0422 4.99923,6.80143 9.2345,6.82219h10.1015c-0.89654,0.00027 -1.73478,-0.44439 -2.23732,-1.18685c-0.50254,-0.74246 -0.60387,-1.68591 -0.27046,-2.51815l7.20338,-18.01442c0.47858,-0.94539 1.44816,-1.54129 2.50779,-1.54129c1.05962,0 2.0292,0.59591 2.50779,1.54129l7.20309,18.01442c0.3334,0.83222 0.23209,1.77564 -0.27042,2.51809c-0.50251,0.74245 -1.3407,1.18713 -2.23722,1.18691h10.1015c4.23527,-0.02076 7.97016,-2.77999 9.2345,-6.82219c5.97842,-20.32894 8.86958,-41.44052 8.57675,-62.62829c0,-51.03862 -31.64807,-91.74346 -32.99516,-93.45342z" fill="#e67e22"></path>
+                      <path d="M164.73627,167.4375h-158.47254c-1.49236,0 -2.70216,-1.2098 -2.70216,-2.70216c0,-1.49236 1.2098,-2.70216 2.70216,-2.70216h158.47254c1.49236,0 2.70216,1.2098 2.70216,2.70216c0,1.49236 -1.2098,2.70216 -2.70216,2.70216z" fill="#f1c40f"></path>
+                      <path d="M70.01296,44.1827l-55.50154,22.7342c-4.71183,19.53429 -4.34344,37.16119 -2.41317,57.24991l68.86348,-28.1746c-0.47466,-17.79124 -4.18475,-35.34738 -10.94877,-51.80951z" fill="#e74c3c"></path>
+                      <path d="M160.12604,93.75845c-9.26328,-9.32767 -21.86204,-14.57896 -35.0079,-14.59164c-12.23041,0.37053 -23.7728,-5.6483 -30.47006,-15.88875c-3.85644,14.49776 -5.35226,29.5221 -4.42997,44.49563c7.873,8.43201 18.97315,13.09907 30.50608,12.82628c14.25496,0.29129 27.57542,7.15328 36.08841,18.59083c2.53666,-15.00551 3.6461,-30.21758 3.31345,-45.43235z" fill="#cccccc"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <figcaption>Surfing</figcaption>
+            </figure>
+          </li>
+          <li class="app__icon_item">
+            <figure class="app__icon">
+              <svg class="app__icon_img" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 171 171" style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,171.98863v-171.98863h171.98863v171.98863z" fill="none"></path>
+                  <g>
+                    <path d="M121.125,28.5h-71.25v114h121.125z" fill="#f1c40f"></path>
+                    <path d="M99.75,142.5l-49.875,-114l-49.875,114z" fill="#e74c3c"></path>
+                    <path d="M49.875,77.35612l-49.875,22.39388l21.375,42.75z" fill="#f1c40f"></path>
+                    <path d="M23.27381,89.30119l-13.29881,30.39881l11.4,22.8l28.5,-65.14388z" fill="#e67e22"></path>
+                    <path d="M78.375,142.5l-28.5,-65.14388l-28.5,65.14388z" fill="#666666"></path>
+                  </g>
+                </g>
+              </svg>
+              <figcaption>Camping</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+  
+      <figure class="app__cover">
+        <img class="app__cover_img" src="https://img.theculturetrip.com/wp-content/uploads/2015/07/shutterstock_343001582-masuleh-vilage-gilan-iran.jpg" alt="Travelar | Iran, Gilan, Masouleh">
+        <span class="app__cover_shape"></span>
+        <figcaption>Iran, Gilan, Masouleh</figcaption>
+      </figure>
+    </section>
+  </div>
+  
+  <video class="visual-hidden" src="https://media.mehrnews.com/d/2019/12/31/4/3334212_720p.mp4"></video> -->
+  <div class="ui container">
+    <div class=" " style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+      <div class="header-div">
+        <h1>Stock List</h1>
+      </div>
+      <div class="search-div">
+        <form method="GET" action="/stock/">
+          <input id="stock_search" name="abb" type="search" placeholder="Find a symbol" />
+          <input id="search_button" type="submit" value="Search" />
+        </form>
+      </div>
+    </div>
+    <form method="GET">
+      <select name="filter">
+        <option value="">All Stocks</option>
+        <!-- <option value="new_intraday_highs">New Intraday High</option> -->
+        <option {% if request.query_params.filter=='new_closing_highs' %} selected="selected" {% endif %}
+          value="new_closing_highs">New Closing High</option>
+        <!-- <option value="new-intraday_lows">New Intraday Low</option>
+                <option value="New_closing_lows">New Closing Lows</option> -->
+      </select>
+      <input type="submit" />
+    </form>
+
+    <table class="ui striped  inverted table">
+      <thead>
+        <tr>
+          <th>Symbols</th>
+          <th>Status</th>
+          <th>Close</th>
+          <th>RSI 14</th>
+          <th>SMA 20</th>
+          <th>SMA 50</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stock in stocks %}
+        <tr>
+          <td>
+            {{ stock.symbol }}
+          </td>
+          <td>
+            <a href="/stock/?abb={{ stock.symbol }}">
+              {{ stock.name }}
+            </a>
+          </td>
+          {% if indicator_values[stock.symbol] %}
+          {% if indicator_values[stock.symbol].close %}
+          <td>{{ indicator_values[stock.symbol].close | round(2) }}</td>
+          {% else %}
+          <td>N/A</td>
+          {% endif %}
+          {% if indicator_values[stock.symbol].rsi_14 %}
+          <td>{{ indicator_values[stock.symbol].rsi_14 | round(2) }}</td>
+          {% else %}
+          <td>N/A</td>
+          {% endif %}
+          {% if indicator_values[stock.symbol].sma_20 %}
+          <td>{{ indicator_values[stock.symbol].sma_20 | round(2) }}</td>
+          {% else %}
+          <td>N/A</td>
+          {% endif %}
+          {% if indicator_values[stock.symbol].sma_50 %}
+          <td>{{ indicator_values[stock.symbol].sma_50 | round(2) }}</td>
+          {% else %}
+          <td>N/A</td>
+          {% endif %}
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+
+<script>
+  const searchSymbol = document.getElementById("stock_search");
+  const searchButton = document.getElementById("search_button");
+  searchButton.addEventListener("click", (e) => {
+    searchSymbol.value = searchSymbol.value.toUpperCase()
+  })
+
+  
+
+</script>
+
+</html>
