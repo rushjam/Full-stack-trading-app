@@ -9,11 +9,11 @@ from fastapi.templating import Jinja2Templates
 from datetime import date
 from datetime import timedelta
 
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
-
 
 @app.get("/")
 def index(request: Request):
@@ -32,9 +32,57 @@ def index(request: Request):
                 )
                 WHERE date = (SELECT MAX(date) FROM stock_price)
         """)
+    elif stock_filter == 'rsi_overbought':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE rsi_14 > 70
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
+    elif stock_filter == 'rsi_oversold':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE rsi_14 < 30
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
+    elif stock_filter == 'above_sma_20':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE close > sma_20
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
+    elif stock_filter == 'below_sma_20':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE close < sma_20
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
+    elif stock_filter == 'above_sma_50':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE close > sma_50
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
+    elif stock_filter == 'below_sma_50':
+        cursor.execute("""
+                SELECT symbol, name, stock_id, date
+                FROM stock_price JOIN stock ON stock.id = stock_price.stock_id
+                WHERE close < sma_50
+                AND date = (SELECT MAX(date) FROM stock_price)
+                ORDER BY symbol
+        """)
     else:
         cursor.execute("""
-            SELECT id, symbol, name FROM stock WHERE symbol LIKE 'SP%' ORDER BY symbol  LIMIT 100
+            SELECT id, symbol, name FROM stock ORDER BY symbol  LIMIT 100
         """)
     rows = cursor.fetchall()
 
@@ -46,7 +94,6 @@ def index(request: Request):
     indicator_values = {}
     for row in indicator_rows:
         indicator_values[row['symbol']] = row
-
     return templates.TemplateResponse("index.html", {"request": request, "stocks": rows, "indicator_values": indicator_values})
 
 
@@ -88,6 +135,17 @@ def apply_strategy(strategy_id: int = Form(...), stock_id: int = Form(...)):
     connection.commit()
 
     return RedirectResponse(url=f"/strategy/{strategy_id}", status_code=303)
+
+@app.get('/strategies')
+def strategies(request: Request):
+    connection = sqlite3.connect(config.DB_FILE)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT * FROM strategy
+    """)
+    strategies = cursor.fetchall()
+    return templates.TemplateResponse("strategies.html", {"request": request, "strategies": strategies})
 
 
 @app.get("/strategy/{strategy_id}")
