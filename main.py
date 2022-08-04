@@ -1,4 +1,5 @@
 import sqlite3
+import uvicorn
 from urllib import response
 import config
 from fastapi import FastAPI, Request, Form
@@ -172,3 +173,7 @@ def strategy(request: Request, strategy_id):
     stocks = cursor.fetchall()
 
     return templates.TemplateResponse("strategy.html", {"request": request, "stocks": stocks, "strategy": strategy})
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
