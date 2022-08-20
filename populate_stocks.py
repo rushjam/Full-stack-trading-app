@@ -21,6 +21,8 @@ assets = api.list_assets()
 
 # insert the data to the database
 for asset in assets:
+    if '/' in asset.symbol:
+        continue
     try:
         if asset.status == 'active' and asset.tradable and asset.symbol not in symbols:
             print("Added stocks")

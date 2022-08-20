@@ -4,16 +4,19 @@
 
 <h1>Strategies</h1>
 
-<table class="ui striped  inverted table">
+<table class="ui striped inverted table">
     {% for strategy in strategies %}
     <tr>
         <td>
             <a href="/strategy/{{strategy.id}}">
                 {{strategy.name}}
             </a>
-
+        </td>
+        <td>
+            <p>
+                {{strategy.desc}}
+            </p>
         </td>
     </tr>
     {% endfor %}
-
     {% endblock %}

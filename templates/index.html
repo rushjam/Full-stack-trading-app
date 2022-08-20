@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <!-- CREDIT UI : https://dribbble.com/shots/16905786-Travel-guide-ui-website -->
-  <!-- 
+<!-- CREDIT UI : https://dribbble.com/shots/16905786-Travel-guide-ui-website -->
+<!-- 
 <div id="error-responsive">
     <span class="ops">OOOPS!!!!</span>
     <div>At the current time Only <span>Desktop</span> View more than <span>1366</span> &times; <span>768</span> Avialble</div>
@@ -151,40 +151,41 @@
   </div>
   
   <video class="visual-hidden" src="https://media.mehrnews.com/d/2019/12/31/4/3334212_720p.mp4"></video> -->
-  <div class="ui container">
-    <div class=" " style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
-      <div class="header-div">
-        <h1>Stock List</h1>
-      </div>
-      <div class="search-div">
-        <form method="GET" action="/stock/">
-          <input id="stock_search" name="abb" type="search" placeholder="Find a symbol" />
-          <input id="search_button" type="submit" value="Search" />
-        </form>
-      </div>
+<div class="ui container">
+  <div class=" " style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+    <div class="header-div">
+      <h1>Stock List</h1>
     </div>
-    <form method="GET">
-      <select name="filter">
-        <option value="">All Stocks</option>
-        <!-- <option value="new_intraday_highs">New Intraday High</option> -->
-        <option {% if request.query_params.filter=='new_closing_highs' %} selected="selected" {% endif %}
-          value="new_closing_highs">New Closing High</option>
-        <option {% if request.query_params.filter=='rsi_overbought' %} selected="selected" {% endif %}
-          value="rsi_overbought">RSI Overbought</option>
-        <option {% if request.query_params.filter=='rsi_oversold' %} selected="selected" {% endif %}
-          value="rsi_oversold">RSI Oversold</option>
-        <option {% if request.query_params.filter=='above_sma_20' %} selected="selected" {% endif %}
-        value="above_sma_20">Above 20 SMA</option>
-        <option {% if request.query_params.filter=='below_sma_20' %} selected="selected" {% endif %}
-        value="below_sma_20">Below 20 SMA</option>
-        <option {% if request.query_params.filter=='above_sma_50' %} selected="selected" {% endif %}
-        value="above_sma_50">Above 50 SMA</option>
-        <option {% if request.query_params.filter=='below_sma_50' %} selected="selected" {% endif %}
-        value="below_sma_50">Below 50 SMA</option>
-      </select>
-      <input type="submit" />
-    </form>
+    <div class="search-div">
+      <form method="GET" action="/stock/">
+        <input id="stock_search" name="abb" type="search" placeholder="Find a symbol" />
+        <input id="search_button" type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+  <form method="GET">
+    <select name="filter">
+      <option value="">All Stocks</option>
+      <!-- <option value="new_intraday_highs">New Intraday High</option> -->
+      <option {% if request.query_params.filter=='new_closing_highs' %} selected="selected" {% endif %}
+        value="new_closing_highs">New Closing High</option>
+      <option {% if request.query_params.filter=='rsi_overbought' %} selected="selected" {% endif %}
+        value="rsi_overbought">RSI Overbought</option>
+      <option {% if request.query_params.filter=='rsi_oversold' %} selected="selected" {% endif %} value="rsi_oversold">
+        RSI Oversold</option>
+      <option {% if request.query_params.filter=='above_sma_20' %} selected="selected" {% endif %} value="above_sma_20">
+        Above 20 SMA</option>
+      <option {% if request.query_params.filter=='below_sma_20' %} selected="selected" {% endif %} value="below_sma_20">
+        Below 20 SMA</option>
+      <option {% if request.query_params.filter=='above_sma_50' %} selected="selected" {% endif %} value="above_sma_50">
+        Above 50 SMA</option>
+      <option {% if request.query_params.filter=='below_sma_50' %} selected="selected" {% endif %} value="below_sma_50">
+        Below 50 SMA</option>
+    </select>
+    <input type="submit" />
+  </form>
 
+  <div style='overflow-x:auto'>
     <table class="ui striped  inverted table">
       <thead>
         <tr>
@@ -233,16 +234,16 @@
         {% endfor %}
       </tbody>
     </table>
- {% endblock %}
-<!-- 
-<script>
-  const searchSymbol = document.getElementById("stock_search");
-  const searchButton = document.getElementById("search_button");
-  searchButton.addEventListener("click", (e) => {
-    searchSymbol.value = searchSymbol.value.toUpperCase()
-  })
+  </div>
+
+  <script>
+    const searchSymbol = document.getElementById("stock_search");
+    const searchButton = document.getElementById("search_button");
+    searchButton.addEventListener("click", (e) => {
+      searchSymbol.value = searchSymbol.value.toUpperCase()
+    })
 
 
 
-</script> -->
-
+  </script>
+  {% endblock %}
