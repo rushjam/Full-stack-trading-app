@@ -5,66 +5,374 @@
 <h1><a href="/">Stocks</a><i class="angle double right icon"></i>{{ stock.name }} ({{stock.symbol}})</h1>
 
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-    <div id="tradingview_fed1d"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script type="text/javascript">
-        new TradingView.widget(
-            {
-                "width": "100%",
-                "height": 610,
-                "symbol": "{{stock.exchange}}:{{stock.symbol}}",
-                "interval": "D",
-                "timezone": "America/Los_Angeles",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "allow_symbol_change": true,
-                "container_id": "tradingview_fed1d"
-            }
-        );
+<section>
+    <div class="tradingview-widget-container">
+        <div id="tradingview_fed1d"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+            new TradingView.widget(
+                {
+                    "width": "100%",
+                    "height": 610,
+                    "symbol": "{{stock.exchange}}:{{stock.symbol}}",
+                    "interval": "D",
+                    "timezone": "America/Los_Angeles",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "allow_symbol_change": true,
+                    "container_id": "tradingview_fed1d"
+                }
+            );
 
-    </script>
-</div>
+        </script>
+    </div>
+</section>
 <!-- TradingView Widget END -->
 
-<form method="POST" action="/apply_strategy">
-    <select name="strategy_id">
-        {% for strategy in strategies %}
-        <option value="{{strategy.id}}">{{ strategy.name }}</option>
+<section>
+    <h2>Strategies for the stock</h2>
+    <form method="POST" action="/apply_strategy">
+        <select name="strategy_id">
+            {% for strategy in strategies %}
+            <option value="{{strategy.id}}">{{ strategy.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="hidden" name="stock_id" value="{{stock.id}}" />
+        <input type="submit" value="Apply Strategy" />
+    </form>
+</section>
+<section>
+    <div class="market_wrapper">
+        <h1>Market</h1>
+        <div class="market_stats_wrapper sub-sec">
+            <h2>Market Stats</h2>
+            <div class="">
+                <div class="market_stats_data_wrapper cards">
+                    <div class="card">
+                        <div class="card_header div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">MARKET CAP</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">Market capitalization, commonly called market cap, is the
+                                        market value of a publicly traded company's outstanding shares. Market
+                                        capitalization is equal to the share price multiplied by the number of shares
+                                        outstanding.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['marketCap'] %}
+                            <p>${{ marketData['marketCap'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">VOLUME</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">In capital markets, volume, or trading volume, is the
+                                        amount
+                                        (total number) of a security (or a given set of securities, or an entire market)
+                                        that was traded during a given period of time.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['volume'] %}
+                            <p>${{ marketData['volume'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">52 Week Change</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">It is the Current Price, less the 52 Week High, divided by
+                                        the
+                                        52 Week High.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['52WeekChange'] %}
+                            {% if marketData['52WeekChange'] > 0 %}
+                            <p style="color: green;">{{ marketData['52WeekChange'] }}%</p>
+                            {% else %}
+                            <p style="color: red;">{{ marketData['52WeekChange'] }}%</p>
+                            {% endif %}
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">PREVIOUS CLOSE</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">Previous close almost always refers to the prior day's
+                                        final
+                                        price of a security when the market officially closes for the day.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['previousClose'] %}
+                            <p>${{ marketData['previousClose'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">DAY HIGH</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">Day high is the highest price at which a stock traded
+                                        during
+                                        the course of the trading day and is typically higher than the closing or equal
+                                        to
+                                        the opening price.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['dayHigh'] %}
+                            <p>${{ marketData['dayHigh'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">DAY LOW</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">Today's low is the lowest price at which a stock trades
+                                        over
+                                        the course of a trading day.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['dayLow'] %}
+                            <p>${{ marketData['dayLow'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">REGULAR MARLET OPEN</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">The opening price is the price at which a security first
+                                        trades upon the opening of an exchange on a trading day.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['regularMarketOpen'] %}
+                            <p>${{ marketData['regularMarketOpen'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="div-flex">
+                            <p class="card_title" style="text-transform: uppercase;">EXCHANGE</p>
+                            <span>
+                                <i class="info circle icon tooltip">
+                                    <span class="tooltiptext">An exchange is a marketplace where securities,
+                                        commodities,
+                                        derivatives and other financial instruments are traded.</span>
+                                </i>
+                            </span>
+                        </div>
+                        <div class="card_info">
+                            {% if marketData['exchange'] %}
+                            <p>{{ marketData['exchange'] }}</p>
+                            {% else %}
+                            <p>Data Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stock_stats_wrapper sub-sec">
+            <h2>About</h2>
+            <div class="stock_name">
+                <h3>{{stock.name}}</h3>
+            </div>
+            <div class="stock_stats_logo_wrapper">
+                {% if marketData["logo_url"] %}
+                <div class="stock_stats_logo" style="background-image: 
+                url({{marketData["logo_url"]}}); background-position: left center; background-size: contain"></div>
+                {% endif %}
+        </div>
+        <div class=" stock_stats_desc_wrapper">
+                    {% if marketData['longBusinessSummary'] %}
+                    <div>
+                        <p class="card_title" style="text-transform: uppercase;">DESCRIPTION</p>
+                        <p>
+                            {{ marketData['longBusinessSummary'] }}
+                        </p>
+                    </div>
+                    {% else %}
+                    <p>No Business Summry Found</p>
+                    {% endif %}
+                </div>
+                <div class="stock_stats_other_info_wrapper">
+                    {% if marketData['website'] %}
+
+                    <p class="card_title" style="text-transform: uppercase;">WEBSITE</p>
+                    <a href="{{marketData['website']}}">{{marketData['website']}}</a>
+                </div>
+                {% endif %}
+
+                {% if marketData['industry'] %}
+                <div class="stock_stats_other_info_wrapper">
+                    <p class="card_title" style="text-transform: uppercase;">INDUSTRY</p>
+                    {{marketData['industry']}}
+                </div>
+                {% endif %}
+
+                {% if marketData['startDate'] %}
+                <div class="stock_stats_other_info_wrapper">
+                    <p class="card_title" style="text-transform: uppercase;">START DATE</p>
+                    {{marketData['startDate']}}
+                </div>
+                {% endif %}
+
+                {% if marketData['sector'] %}
+                <div class="stock_stats_other_info_wrapper">
+                    <p class="card_title" style="text-transform: uppercase;">SECTOR</p>
+                    {{marketData['sector']}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+</section>
+<section class="news_wrapper">
+    <h2>News</h2>
+    <div class="cards">
+        {% for news in newsData %}
+        <a href="{{news[" link"]}}" target="_blank" rel="noopener noreferrer">
+            <div class="card div-flex" style="justify-content: space-between; margin: 10px 10px 0 0">
+                <div class="news_title"
+                    style="display:flex; flex-direction:column; justify-content: space-between; padding-right: 10px;">
+                    <p>{{news['date']}}</p>
+                    <p>
+                        {{news['title']}}
+                    </p>
+                </div>
+                <div class="news_thumbnail">
+                    {% if 'thumbnail'in news %}
+                    <div class="stock_stats_logo" style="background-image: 
+                    url({{news["thumbnail"]["resolutions"][0]['url']}}); background-size: cover"></div>
+                    {% else %}
+                    <div class="stock_stats_logo"
+                        style="background-image: url('https://m.foolcdn.com/media/dubs/original_images/Intro_slide_-_digital_stock_chart_going_up_-_source_getty.jpg'); background-size: cover">
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </a>
         {% endfor %}
-    </select>
+    </div>
+</section>
+<section style="background-color: #161a25;">
+    <div class="ui items items-padding">
+        <div class="item" >
+          <div class="ui tiny image">
+            {% if marketData["logo_url"] %}
+                <div class="stock_stats_logo" style="background-image: 
+                url({{marketData["logo_url"]}}); background-position: left center; background-size: contain">
+                </div>
+            {% endif %}
+          </div>
+          <div class="content content-flex" style="padding-left: 16px">
+            <a id="modal-click" class="header" style="color: white;">Want to see the historical data of {{stock.name}}? <i class="hand point right icon"></i></a>
+            <div class="description">
+              <p style="font-size: 18px; color: white;">Analyse the historical data and help your self to apply strategies based on the it.</p>
+            </div>
+          </div>
+        </div>
+</section>
+<div id="modal" class="ui modal show">
+    <div class="header">
+        <div>
+            <table class="ui striped  inverted table">
+                <thead>
+                    <tr style="display: flex !important; justify-content: space-around;">
+                        <th>Date</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Close</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="scrolling content">
+        <div>
+            <table class="ui striped  inverted table">
+                <tbody>
+                    {% for bar in bars %}
+                    <tr style="display: flex !important; justify-content: space-around;">
+                        <td>{{bar.Date}}</td>
+                        <td>{{bar.Open}}</td>
+                        <td>{{bar.High}}</td>
+                        <td>{{bar.Low}}</td>
+                        <td>{{bar.Close}}</td>
+                        <td>{{bar.Volume}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+            <span id="close" class="close">Close</span>
+    </div>
+  </div>
 
-    <input type="hidden" name="stock_id" value="{{stock.id}}" />
-    <input type="submit" value="Apply Strategy" />
-</form>
+</div>
 
+<script>
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("close")
+    const body = document.querySelector('body')
+    const modalClick = document.getElementById("modal-click");
 
-<h2>Prices</h2>
-<table class="ui striped  inverted table">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Close</th>
-            <th>Volume</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for bar in bars %}
-        <tr>
-            <td>{{bar.Date}}</td>
-            <td>{{bar.Open}}</td>
-            <td>{{bar.High}}</td>
-            <td>{{bar.Low}}</td>
-            <td>{{bar.Close}}</td>
-            <td>{{bar.Volume}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    modalClick.addEventListener("click", (e) => {
+        modal.classList.add("active");
+        body.classList.add('bg-color');
+        
+    });
+    closeBtn.addEventListener("click", (e) => {
+        body.classList.remove('bg-color');
+        modal.classList.remove("active");
+    })
+    
+</script>
 
-    {% endblock %}
+{% endblock %}

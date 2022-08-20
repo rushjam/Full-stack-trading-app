@@ -1,20 +1,24 @@
 import sqlite3
-import uvicorn
-from urllib import response
 import config
+import yfinance as yf
+
+from urllib import response
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.templating import Jinja2Templates
 from datetime import date
+from datetime import datetime
 from datetime import timedelta
+from numerize import numerize
 
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
+
 
 @app.get("/")
 def index(request: Request):
@@ -119,9 +123,81 @@ def stock_detail(request: Request):
 
     cursor.execute("""
         SELECT * FROM stock_price WHERE stock_id = ?
-    """, (row['id'],))
+    """, (row['id'], ))
     bars = cursor.fetchall()
-    return templates.TemplateResponse("stock_detail.html", {"request": request, "stock": row, "bars": bars, "strategies": strategies})
+    
+    # yfinanace data
+    yfinance = yf.Ticker(row['symbol'])
+    # yfinance.history(period="max", proxy="https://10.10.1.10:1080")
+    stock_details = yfinance.info   
+    stock_news = yfinance.news
+
+    def numberConversion(number):
+        if number:
+            return numerize.numerize(number)
+        else:
+            return None
+    def dataChecker(checkerObj, key):
+        if key in checkerObj:
+            return checkerObj[key]
+        else:
+            return None    
+    def roundOf(number, upTo):
+        if number:
+            return round(number * 100, upTo)
+    
+    # marketdata
+    marketCap = dataChecker(stock_details, 'marketCap')
+    volume = dataChecker(stock_details, 'volume')
+    volume24Hr = dataChecker(stock_details, 'volume24Hr')
+    _52WeekChange = dataChecker(stock_details, '52WeekChange')
+    previousClose = dataChecker(stock_details, 'previousClose')
+    dayHigh = dataChecker(stock_details, 'dayHigh')
+    dayLow = dataChecker(stock_details, 'dayLow')
+    regularMarketOpen = dataChecker(stock_details, 'regularMarketOpen')
+    exchange = dataChecker(stock_details, 'exchange')
+    logo_url = dataChecker(stock_details, 'logo_url')
+    longBusinessSummary = dataChecker(stock_details, 'longBusinessSummary')
+    website = dataChecker(stock_details, 'website')
+    industry = dataChecker(stock_details, 'industry')
+    startDate = dataChecker(stock_details, 'industry')
+    sector = dataChecker(stock_details, 'sector')
+        
+    marketData = {
+        "marketCap": numberConversion(marketCap),
+        "volume": numberConversion(volume),
+        "52WeekChange": roundOf(_52WeekChange, 2),
+        "previousClose": previousClose,
+        "dayHigh": dayHigh,
+        "dayLow": dayLow,
+        "regularMarketOpen": regularMarketOpen,
+        "logo_url": logo_url,
+        "longBusinessSummary": longBusinessSummary,
+        "website": website,
+        "industry": industry,
+        "startDate": startDate,
+        "sector": sector,
+        "exchange": exchange
+    }
+
+    newsData = []
+    for index, news in enumerate(stock_news):
+        newsObj = {}
+        newsObj['id'] = index
+        if 'title' in news:
+            newsObj['title'] = news['title']
+        if 'link' in news:
+            newsObj['link'] = news['link']
+        if 'thumbnail' in news:
+            newsObj['thumbnail'] = news['thumbnail']
+        if 'providerPublishTime' in news:
+            
+            miliSec = datetime.fromtimestamp(news['providerPublishTime'])
+            reableDate = miliSec.strftime('%m/%d/%Y')
+            newsObj['date'] = reableDate
+        newsData.append(newsObj) 
+    
+    return templates.TemplateResponse("stock_detail.html", {"request": request, "stock": row, "bars": bars, "strategies": strategies, "marketData": marketData, "stock_details": stock_details, "newsData": newsData})
 
 
 @app.post("/apply_strategy")
@@ -136,6 +212,7 @@ def apply_strategy(strategy_id: int = Form(...), stock_id: int = Form(...)):
     connection.commit()
 
     return RedirectResponse(url=f"/strategy/{strategy_id}", status_code=303)
+
 
 @app.get('/strategies')
 def strategies(request: Request):

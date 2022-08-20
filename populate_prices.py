@@ -28,17 +28,22 @@ for row in rows:
     symbols.append(symbol)
     stock_dict[symbol] = row['id']
 
+# api fetch from alpaca
 api = tradeapi.REST(config.API_KEY, config.SECRET_KEY,
                     base_url=config.BASE_URL)
 
 cursor.execute("""
     SELECT MAX(date) FROM stock_price
 """)
-lastClosePrice = cursor.fetchone()
+lastCloseDate = cursor.fetchone()
+for i in lastCloseDate:
+    lastDate = i
+
+print("lastdate", datetime.strptime(lastDate, '%Y-%m-%d').date() + timedelta(days=1))
 chunk_size = 200
 
 yesterDayDate = date.today() - timedelta(days=1)
-PastDate = yesterDayDate - timedelta(days=100)
+PastDate = datetime.strptime(lastDate, '%Y-%m-%d').date() + timedelta(days=1)
 dayBeforeYesterDayDate = date.today() - timedelta(days=2)
 day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
 yesterDay = datetime.strptime(str(yesterDayDate), '%Y-%m-%d').weekday()
@@ -46,8 +51,12 @@ dayBeforeYesterDay = datetime.strptime(str(dayBeforeYesterDayDate), '%Y-%m-%d').
 
 # symbols = ['DOGE/USD', 'DOGE/USDT', 'MATIC/USD', 'SOL/BTC', 'MATIC/BTC', 'MKR/USD', 'NEAR/USD', 'NEAR/USDT', 'SOL/USDT']
 # symbols = ['DOGE/USD', 'RYAAY', 'BTWNU', 'RYAM', 'RYAN']
+
+
 invalid_symbols = []
 for i in range(0, len(symbols), chunk_size):
+    print("gey")
+    break
     symbol_chunk = []
     for symbol in symbols[i: i+chunk_size]:
         if '/' in symbol:
@@ -56,7 +65,7 @@ for i in range(0, len(symbols), chunk_size):
             symbol_chunk.append(symbol)
     if len(symbol_chunk) > 0:
         barsets = api.get_bars_iter(
-            symbol_chunk, TimeFrame.Day, yesterDayDate, yesterDayDate, adjustment='raw')
+            symbol_chunk, TimeFrame.Day, PastDate, yesterDayDate, adjustment='raw')
     
     recent_closes = []
     sma_20, sma_50, rsi_14 = None, None, None
@@ -73,7 +82,7 @@ for i in range(0, len(symbols), chunk_size):
             sma_50 = tulipy.sma(numpy.array(recent_closes), period=50)[-1]
             rsi_14 = tulipy.rsi(numpy.array(recent_closes), period=14)[-1]
         stock_id = stock_dict[symbol.S]
-
+        
         cursor.execute("""
             INSERT INTO stock_price (stock_id, date, open, high, low, close, volume, sma_20, sma_50, rsi_14)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
