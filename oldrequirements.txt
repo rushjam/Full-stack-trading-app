@@ -110,7 +110,7 @@ six==1.16.0
 smmap==5.0.0
 sniffio==1.2.0
 soupsieve==2.3.2.post1
-sqlparse==0.4.1
+sqlparse==0.4.2
 stack-data==0.3.0
 starlette==0.19.1
 streamlit==1.11.1
