@@ -4,7 +4,7 @@ newtulipy==0.4.6
 numpy==1.20.3
 uvicorn==0.12.3
 aiofiles==0.6.0
-python-multipart==0.0.5
+python-multipart==0.0.7
 jinja2==3.1.2
 yfinance==0.1.74
 numerize==0.12
